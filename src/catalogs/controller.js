@@ -72,7 +72,7 @@ const updateItem = (req, res) => {
             res.send('Item does not exist in the database.')
         }
 
-        pool.query(queries.updateItem, [title], (error, results) => {
+        pool.query(queries.updateItem, [title, id], (error, results) => {
             if (error) throw error;
             res.status(200).send("Item Updated successfully")
         })
