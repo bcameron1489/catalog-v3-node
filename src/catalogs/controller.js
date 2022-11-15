@@ -45,8 +45,26 @@ const getItemById = (req, res) => {
     })
 }
 
+const removeItem = (req, res) => {
+    const id = parseInt(req.params.id);
+
+    pool.query(queries.getItemById, [id], (error, results) => {
+        const noItemFound = !results.rows.length;
+        if (noItemFound) {
+            res.send('Item does not exist in the database.')
+        }
+
+        pool.query(queries.removeItem, [id], (error, results) => {
+            if (error) throw error;
+            res.status(200).send("Item Removed Successfully");
+        })
+        
+    })
+}
+
 module.exports = {
     getCatalogs,
     getItemById,
     addItem,
+    removeItem,
 }
