@@ -4,6 +4,8 @@ const controller = require('./controller')
 const router = Router();
 
 router.get('/', controller.getCatalogs);
+router.post('/', controller.addItem);
 router.get('/:id', controller.getItemById);
+
 
 module.exports = router;
