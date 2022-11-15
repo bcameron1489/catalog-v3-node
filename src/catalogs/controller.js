@@ -17,10 +17,13 @@ const addItem = (req, res) => {
         }
 
         // Add item to catalogs
-        pool.query(queries.addItem, [title, url, image_url, descriptions], (error, results) => {
-            if (error) throw error;
-            res.status(201).send("Item Created Successfully")
-            console.log("Item Created")
+        pool.query(
+            queries.addItem, 
+            [title, url, image_url, descriptions], 
+            (error, results) => {
+                if (error) throw error;
+                res.status(201).send("Item Created Successfully")
+                console.log("Item Created")
         })
     })
 }
