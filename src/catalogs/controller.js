@@ -1,6 +1,8 @@
 const pool = require('../../db')
 const queries = require('./queries')
 
+
+// ********  HANDLE DATABASE QUERIES   ********** //
 const getCatalogs = (req, res) => {
     pool.query(queries.getCatalogs, (error, results) => {
         if (error) throw error;
