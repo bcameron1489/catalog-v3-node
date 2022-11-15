@@ -3,6 +3,10 @@ const queries = require('./queries')
 
 
 // ********  HANDLE DATABASE QUERIES   ********** //
+
+
+
+//  Get all catalog items in DB
 const getCatalogs = (req, res) => {
     pool.query(queries.getCatalogs, (error, results) => {
         if (error) throw error;
@@ -10,6 +14,8 @@ const getCatalogs = (req, res) => {
     })
 }
 
+
+//  Add an item to DB
 const addItem = (req, res) => {
     const { title, url, image_url, descriptions } = req.body;
     // Check if title exists
@@ -30,6 +36,7 @@ const addItem = (req, res) => {
     })
 }
 
+//  Get specific catalog item by ID from DB
 const getItemById = (req, res) => {
     const id = parseInt(req.params.id);
     pool.query(queries.getItemById, [id], (error, results) => {
