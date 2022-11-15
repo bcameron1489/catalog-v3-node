@@ -6,6 +6,7 @@ const router = Router();
 router.get('/', controller.getCatalogs);
 router.post('/', controller.addItem);
 router.get('/:id', controller.getItemById);
+router.delete('/:id', controller.removeItem);
 
 
 module.exports = router;
