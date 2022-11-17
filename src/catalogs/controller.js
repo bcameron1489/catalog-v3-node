@@ -98,6 +98,26 @@ const removeItem = (req, res) => {
         pool.query(queries.removeItem, [id], (error, results) => {
             if (error) throw error;
             res.status(200).send("Item Removed Successfully");
+
+            const url = 'https://a.klaviyo.com/api/catalog-items/$custom:::$default:::' + `${id}`;
+            const options = {
+            method: 'DELETE',
+            headers: {
+                accept: 'application/json',
+                revision: '2022-10-17',
+                Authorization: 'Klaviyo-API-Key pk_9a80e7e4588264bf946559b8fe0e748095'
+            }
+            };
+
+            fetch(url, options)
+            .then(r => {
+                if (r.ok) {
+                    console.log('success')
+                } else  {
+                    console.log('failure')
+                }
+            })
+            .catch(err => console.error('error:' + err));
         })
         
     })
