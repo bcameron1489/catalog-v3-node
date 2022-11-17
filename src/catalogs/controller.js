@@ -29,9 +29,50 @@ const addItem = (req, res) => {
             queries.addItem, 
             [title, url, image_url, descriptions], 
             (error, results) => {
-                if (error) throw error;
-                res.status(201).send("Item Created Successfully")
-                console.log("Item Created")
+                if (error) {
+                    throw error;
+                } else {
+                    res.status(201).send("Item Created Successfully")
+                    console.log(results.rows)
+
+
+                    //  *****  Start Klaviyo Call
+                    const jsonData = results.rows[0]
+                    console.log(jsonData)
+                    const data = jsonData
+
+
+                    const url = 'https://a.klaviyo.com/api/catalog-items/';
+                    const options = {
+                    method: 'POST',
+                    headers: {
+                        accept: 'application/json',
+                        revision: '2022-10-17',
+                        'content-type': 'application/json',
+                        Authorization: 'Klaviyo-API-Key pk_9a80e7e4588264bf946559b8fe0e748095'
+                    },
+                    body: JSON.stringify({
+                        data: {
+                        type: 'catalog-item',
+                        attributes: {
+                            integration_type: '$custom',
+                            images: [`${data.image_url}`],
+                            external_id: `${data.id}`,
+                            title: `${data.title}`,
+                            description: `${data.descriptions}`,
+                            url: `${data.url}`,
+                            image_full_url: `${data.image_url}`
+                        }
+                        }
+                    })
+                    };
+
+                    fetch(url, options)
+                    .then(res => res.json())
+                    .then(json => console.log(json))
+                    .catch(err => console.error('error:' + err));
+                    console.log('request url structure: ' + url)
+                }
         })
     })
 }
