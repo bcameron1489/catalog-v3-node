@@ -1,6 +1,7 @@
 const pool = require('../../db')
 const queries = require('./queries')
-const fetch = require('node-fetch');
+const fetch = require('node-fetch')
+const env = require('./env')
 
 
 // ********  HANDLE DATABASE QUERIES   ********** //
@@ -50,7 +51,7 @@ const addItem = (req, res) => {
                         accept: 'application/json',
                         revision: '2022-10-17',
                         'content-type': 'application/json',
-                        Authorization: 'Klaviyo-API-Key pk_9a80e7e4588264bf946559b8fe0e748095'
+                        Authorization: env.auth
                     },
                     body: JSON.stringify({
                         data: {
@@ -106,7 +107,7 @@ const removeItem = (req, res) => {
             headers: {
                 accept: 'application/json',
                 revision: '2022-10-17',
-                Authorization: 'Klaviyo-API-Key pk_9a80e7e4588264bf946559b8fe0e748095'
+                Authorization: env.auth
             }
             };
 
@@ -151,7 +152,7 @@ const updateItem = (req, res) => {
                 accept: 'application/json',
                 revision: '2022-10-17',
                 'content-type': 'application/json',
-                Authorization: 'Klaviyo-API-Key pk_9a80e7e4588264bf946559b8fe0e748095'
+                Authorization: env.auth
             },
             body: JSON.stringify({data: {type: 'catalog-item', attributes: {title: `${data.title}`}, id: '$custom:::$default:::' + `${data.id}`}})
             };
