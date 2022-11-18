@@ -80,7 +80,7 @@ const addItem = (req, res) => {
 
 //  Get specific catalog item by ID from DB
 const getItemById = (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.id)
     pool.query(queries.getItemById, [id], (error, results) => {
         if (error) throw error;
         res.status(200).json(results.rows);
@@ -138,6 +138,28 @@ const updateItem = (req, res) => {
         pool.query(queries.updateItem, [title, id], (error, results) => {
             if (error) throw error;
             res.status(200).send("Item Updated successfully")
+            const data = results.rows[0]
+            console.log(data.id, data.title)
+
+            // Begin Klaviyo Request
+
+            const url = 'https://a.klaviyo.com/api/catalog-items/$custom:::$default:::' + `${data.id}`
+            console.log(url)
+            const options = {
+            method: 'PATCH',
+            headers: {
+                accept: 'application/json',
+                revision: '2022-10-17',
+                'content-type': 'application/json',
+                Authorization: 'Klaviyo-API-Key pk_9a80e7e4588264bf946559b8fe0e748095'
+            },
+            body: JSON.stringify({data: {type: 'catalog-item', attributes: {title: `${data.title}`}, id: '$custom:::$default:::' + `${data.id}`}})
+            };
+            console.log(options)
+            fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
         })
     })
 }
