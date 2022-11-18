@@ -1,5 +1,6 @@
 const pool = require('../../db')
 const queries = require('./queries')
+const fetch = require('node-fetch');
 
 
 // ********  HANDLE DATABASE QUERIES   ********** //
@@ -112,9 +113,10 @@ const removeItem = (req, res) => {
             fetch(url, options)
             .then(r => {
                 if (r.ok) {
-                    console.log('success')
+                    console.log('Item successfully removed from klaviyo catalog')
+                    console.log('Your request URL should be structured as follows:  ' + url)
                 } else  {
-                    console.log('failure')
+                    console.log('Failed to remove item from Klaviyo, check to see if item exists')
                 }
             })
             .catch(err => console.error('error:' + err));
