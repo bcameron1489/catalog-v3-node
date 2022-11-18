@@ -164,7 +164,7 @@ const updateItem = (req, res) => {
         })
     })
 }
-// asd
+
 module.exports = {
     getCatalogs,
     getItemById,
