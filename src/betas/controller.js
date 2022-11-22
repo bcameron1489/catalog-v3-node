@@ -162,10 +162,43 @@ const getSegmentTags = (req,res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Post Request for creating tags
+
+const createTag = (req,res) => {
+    const name = req.params.name
+    const url = 'https://a.klaviyo.com/api/tags/';
+    const options = {
+    method: 'POST',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({data: {type: 'tag', attributes: {name: `${name}`}}})
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 module.exports = {
     getTags,
     getTagById,
     getListTags,
     getFlowTags,
     getSegmentTags,
+    createTag,
 }

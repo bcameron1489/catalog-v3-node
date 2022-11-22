@@ -14,5 +14,7 @@ router.get('/flow/:id', controller.getFlowTags);
 router.get('/list/:id', controller.getListTags);
 // segments tags
 router.get('/segment/:id', controller.getSegmentTags);
+// Create tag
+router.post('/create-tag/:name', controller.createTag);
 
 module.exports = router
