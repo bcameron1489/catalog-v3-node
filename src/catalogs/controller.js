@@ -1,7 +1,7 @@
 const pool = require('../../db')
 const queries = require('./queries')
 const fetch = require('node-fetch')
-const env = require('./env')
+const env = require('../env')
 
 
 // ********  HANDLE DATABASE QUERIES   ********** //
