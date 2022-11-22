@@ -10,5 +10,7 @@ router.get('/', controller.getTags);
 router.get('/:id', controller.getTagById);
 // flow tags
 router.get('/flow/:id', controller.getFlowTags);
+// list tags
+router.get('/list/:id', controller.getListTags);
 
 module.exports = router
