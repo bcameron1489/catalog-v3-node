@@ -194,6 +194,40 @@ const createTag = (req,res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Update Tag
+
+const updateTag = (req,res) => {
+    const id = req.params.id
+    const name = req.body.name
+    const url = 'https://a.klaviyo.com/api/tags/' + `${id}`;
+    const options = {
+    method: 'PATCH',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({data: {type: 'tag', attributes: {name: `${name}`}, id: `${id}`}})
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+        } else {
+            console.log('REQUEST FAILURE')
+            res.end()
+        }
+    })
+    .catch(err => console.error('error:' + err));
+    res.status(200).send("Tag Updated successfully to " + `${name}`)
+}
+
+
+
+
+
 module.exports = {
     getTags,
     getTagById,
@@ -201,4 +235,5 @@ module.exports = {
     getFlowTags,
     getSegmentTags,
     createTag,
+    updateTag,
 }

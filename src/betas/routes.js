@@ -16,5 +16,8 @@ router.get('/list/:id', controller.getListTags);
 router.get('/segment/:id', controller.getSegmentTags);
 // Create tag
 router.post('/create-tag/:name', controller.createTag);
+// Update Tag
+router.put('/update-tag/:id', controller.updateTag);
+
 
 module.exports = router
