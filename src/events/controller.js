@@ -33,8 +33,47 @@ const getEvents = (req,res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Create Event
 
+const createEvent = (req, res) => {
+    const {email, name} = req.body
+    console.log(`${email}`, `${name}`)
+    const url = 'https://a.klaviyo.com/api/events/';
+    const options = {
+    method: 'POST',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({
+        data: {
+        type: 'event',
+        attributes: {
+            profile: {email: `${email}`},
+            metric: {name: `${name}`},
+            properties: {'Test Property': 'Test Value'}
+        }
+        }
+    })
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS: 202 ACCEPTED')
+        } else {
+            console.log('REQUEST FAILURE')
+            res.end()
+        }
+    })
+    .catch(err => console.error('error:' + err));
+
+    res.status(202).send({msg: '202 Accepted, ' + `${name}` + ' sent with profile ' + `${email}`})
+}
 
 module.exports = {
     getEvents,
+    createEvent,
 }
