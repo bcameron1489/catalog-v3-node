@@ -253,6 +253,36 @@ const deleteTag = (req, res) => {
 
 }
 
+const getTagRelationships = (req, res) => {
+    const id = req.params.id
+    const resource = req.params.resource
+    const url = 'https://a.klaviyo.com/api/tags/' + `${id}` + '/relationships/' + `${resource}` + '/'
+    console.log(id, resource, url)
+    const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        Authorization: env.auth
+    }
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 
 
 
@@ -266,4 +296,5 @@ module.exports = {
     createTag,
     updateTag,
     deleteTag,
+    getTagRelationships,
 }

@@ -18,8 +18,10 @@ router.get('/segment/:id', controller.getSegmentTags);
 router.post('/create-tag/:name', controller.createTag);
 // Update Tag
 router.put('/update-tag/:id', controller.updateTag);
-// Update Tag
+// Delete Tag
 router.delete('/delete-tag/:id', controller.deleteTag);
+// Get Tag Relationshipts
+router.get('/get-relationships/:id/:resource', controller.getTagRelationships);
 
 
 module.exports = router
