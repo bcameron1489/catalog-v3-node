@@ -224,6 +224,35 @@ const updateTag = (req,res) => {
     res.status(200).send("Tag Updated successfully to " + `${name}`)
 }
 
+// Delete Tag
+
+const deleteTag = (req, res) => {
+    const id = req.params.id
+    const url = 'https://a.klaviyo.com/api/tags/' + `${id}`;
+    const options = {
+    method: 'DELETE',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        Authorization: env.auth
+    }
+    };
+
+    fetch(url, options)
+            .then(r => {
+                if (r.ok) {
+                    console.log('Deleted Tag')
+                } else  {
+                    console.log('Failed to remove tag')
+                    return ;
+                }
+            })
+            .catch(err => console.error('error:' + err));
+
+    res.status(200).send('Your Tag was deleted with the ID ' + `${id}`)
+
+}
+
 
 
 
@@ -236,4 +265,5 @@ module.exports = {
     getSegmentTags,
     createTag,
     updateTag,
+    deleteTag,
 }
