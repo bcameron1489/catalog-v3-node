@@ -287,7 +287,7 @@ const getTagRelationships = (req, res) => {
 
 
 module.exports = {
-    getTags,
+    getTags,    
     getTagById,
     getListTags,
     getFlowTags,
