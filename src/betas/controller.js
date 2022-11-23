@@ -257,7 +257,6 @@ const getTagRelationships = (req, res) => {
     const id = req.params.id
     const resource = req.params.resource
     const url = 'https://a.klaviyo.com/api/tags/' + `${id}` + '/relationships/' + `${resource}` + '/'
-    console.log(id, resource, url)
     const options = {
     method: 'GET',
     headers: {
