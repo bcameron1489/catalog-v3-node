@@ -33,6 +33,36 @@ const getEvents = (req,res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Get event by id
+
+const getEventById = (req, res) => {
+    const id = req.params.id
+    const url = 'https://a.klaviyo.com/api/events/' + `${id}` + '/?fields[event]=metric_id,profile_id,timestamp,event_properties&fields[metric]=name,created,integration&fields[profile]=email&include=metrics,profiles';
+    const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        Authorization: env.auth
+    }
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 // Create Event
 
 const createEvent = (req, res) => {
@@ -73,7 +103,9 @@ const createEvent = (req, res) => {
     res.status(202).send({msg: '202 Accepted, ' + `${name}` + ' sent with profile ' + `${email}`})
 }
 
+
 module.exports = {
     getEvents,
+    getEventById,
     createEvent,
 }
