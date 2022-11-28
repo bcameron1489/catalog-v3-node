@@ -27,6 +27,6 @@ router.get('/get-tag-groups/:nameFilter', controller.getTagGroups);
 // Get Tag Group (by ID)
 router.get('/get-tag-group/:id', controller.getTagGroupById);
 // Create Tag Group
-router.post('/create-tag-group/:group', controller.createTagGroup);
+router.post('/create-tag-group/', controller.createTagGroup);
 
 module.exports = router
