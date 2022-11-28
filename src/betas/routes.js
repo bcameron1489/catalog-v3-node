@@ -26,5 +26,7 @@ router.get('/get-relationships/:id/:resource', controller.getTagRelationships);
 router.get('/get-tag-groups/:nameFilter', controller.getTagGroups);
 // Get Tag Group (by ID)
 router.get('/get-tag-group/:id', controller.getTagGroupById);
+// Create Tag Group
+router.post('/create-tag-group/:group', controller.createTagGroup);
 
 module.exports = router
