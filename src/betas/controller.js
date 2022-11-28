@@ -166,7 +166,8 @@ const getSegmentTags = (req,res) => {
 
 const getTagGroups = (req, res) => {
     const nameFilter = JSON.stringify(`${req.params.nameFilter}`)
-    const url = 'https://a.klaviyo.com/api/tag-groups/?fields[tag-group]=name&filter=contains(name,' + `${nameFilter}`  + ')&sort=name';
+    const url = 'https://a.klaviyo.com/api/tag-groups/';
+    // filtering example -  ?fields[tag-group]=name&filter=contains(name,' + `${nameFilter}`  + ')&sort=name
     console.log(url)
     const options = {
     method: 'GET',
@@ -319,6 +320,44 @@ const updateTag = (req,res) => {
     res.status(200).send("Tag Updated successfully to " + `${name}`)
 }
 
+// Update Tag Group (this only updates name)
+
+const updateTagGroup = (req, res) => {
+    const id = req.params.id
+    const name = req.body.name
+    const returnFields = req.body.returnFields
+    const url = 'https://a.klaviyo.com/api/tag-groups/' + `${id}`;
+    const options = {
+    method: 'PATCH',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({
+        data: {
+        type: 'tag-group',
+        attributes: {return_fields: `${returnFields}`, name: `${name}`},
+        id: `${id}`
+        }
+    })
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+        } else {
+            console.log('REQUEST FAILURE')
+            res.end()
+        }
+    })
+    .catch(err => console.error('error:' + err));
+    res.send('Successfully Updated Tag Group to ' + `${name}`)
+
+}
+
 // Delete Tag
 
 const deleteTag = (req, res) => {
@@ -392,6 +431,7 @@ module.exports = {
     createTag,
     createTagGroup,
     updateTag,
+    updateTagGroup,
     deleteTag,
     getTagRelationships,
 }
