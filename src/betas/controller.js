@@ -193,6 +193,36 @@ const getTagGroups = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Get Tag Group (by ID)
+
+const getTagGroupById = (req, res) => {
+    const id = req.params.id
+    const url = 'https://a.klaviyo.com/api/tag-groups/'+ `${id}` +'/?fields[tag-group]=name';
+    const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        Authorization: env.auth
+    }
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 // Post Request for creating tags
 
 const createTag = (req,res) => {
@@ -324,6 +354,7 @@ module.exports = {
     getFlowTags,
     getSegmentTags,
     getTagGroups,
+    getTagGroupById,
     createTag,
     updateTag,
     deleteTag,
