@@ -255,6 +255,40 @@ const createTag = (req,res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Post request for creating tag groups
+
+const createTagGroup = (req, res) => {
+    const group = req.body.group
+    const url = 'https://a.klaviyo.com/api/tag-groups/';
+    const options = {
+    method: 'POST',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({
+        data: {type: 'tag-group', attributes: {name: `${group}`, exclusive: false}}
+    })
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 // Update Tag
 
 const updateTag = (req,res) => {
@@ -356,6 +390,7 @@ module.exports = {
     getTagGroups,
     getTagGroupById,
     createTag,
+    createTagGroup,
     updateTag,
     deleteTag,
     getTagRelationships,
