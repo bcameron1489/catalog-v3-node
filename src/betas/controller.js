@@ -387,6 +387,34 @@ const deleteTag = (req, res) => {
 
 }
 
+// Delete Tag Group
+
+const deleteTagGroup = (req, res) => {
+    const id = req.params.id
+    const url = 'https://a.klaviyo.com/api/tag-groups/' + `${id}`;
+    const options = {
+    method: 'DELETE',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        Authorization: env.auth
+    }
+    };
+
+    fetch(url, options)
+            .then(r => {
+                if (r.ok) {
+                    console.log('Deleted Tag Group')
+                } else  {
+                    console.log('Failed to remove tag')
+                    return ;
+                }
+            })
+            .catch(err => console.error('error:' + err));
+
+    res.status(200).send('Your Tag Group was deleted with the ID ' + `${id}`)
+}
+
 const getTagRelationships = (req, res) => {
     const id = req.params.id
     const resource = req.params.resource
@@ -433,5 +461,6 @@ module.exports = {
     updateTag,
     updateTagGroup,
     deleteTag,
+    deleteTagGroup,
     getTagRelationships,
 }
