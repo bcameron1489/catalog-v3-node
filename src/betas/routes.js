@@ -32,7 +32,7 @@ router.post('/create-tag-group/', controller.createTagGroup);
 router.put('/update-tag-group/:id', controller.updateTagGroup);
 // Delete Tag Group
 router.delete('/delete-tag-group/:id', controller.deleteTagGroup);
-// Get tag relationships
-router.get('/get-tag-group-relationships', controller.getTagGroupRelationships);
+// Get tag group relationships
+router.get('/get-tag-group-relationships/:id', controller.getTagGroupRelationships);
 
 module.exports = router
