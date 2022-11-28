@@ -28,5 +28,7 @@ router.get('/get-tag-groups/:nameFilter', controller.getTagGroups);
 router.get('/get-tag-group/:id', controller.getTagGroupById);
 // Create Tag Group
 router.post('/create-tag-group/', controller.createTagGroup);
+// Update Tag Group (this only updates name)
+router.put('/update-tag-group/:id', controller.updateTagGroup);
 
 module.exports = router
