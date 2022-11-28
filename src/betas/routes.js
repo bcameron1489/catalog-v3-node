@@ -22,6 +22,8 @@ router.put('/update-tag/:id', controller.updateTag);
 router.delete('/delete-tag/:id', controller.deleteTag);
 // Get Tag Relationshipts
 router.get('/get-relationships/:id/:resource', controller.getTagRelationships);
+// Get Tag Groups
+router.get('/get-tag-groups/:nameFilter', controller.getTagGroups);
 
 
 module.exports = router

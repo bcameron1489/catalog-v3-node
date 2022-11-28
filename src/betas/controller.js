@@ -162,6 +162,37 @@ const getSegmentTags = (req,res) => {
     .catch(err => console.error('error:' + err));
 }
 
+//  Beta for get tag groups
+
+const getTagGroups = (req, res) => {
+    const nameFilter = JSON.stringify(`${req.params.nameFilter}`)
+    const url = 'https://a.klaviyo.com/api/tag-groups/?fields[tag-group]=name&filter=contains(name,' + `${nameFilter}`  + ')&sort=name';
+    console.log(url)
+    const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-11-14.pre',
+        Authorization: env.auth
+    }
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 // Post Request for creating tags
 
 const createTag = (req,res) => {
@@ -292,6 +323,7 @@ module.exports = {
     getListTags,
     getFlowTags,
     getSegmentTags,
+    getTagGroups,
     createTag,
     updateTag,
     deleteTag,
