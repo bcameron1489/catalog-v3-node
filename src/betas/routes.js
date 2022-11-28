@@ -30,5 +30,7 @@ router.get('/get-tag-group/:id', controller.getTagGroupById);
 router.post('/create-tag-group/', controller.createTagGroup);
 // Update Tag Group (this only updates name)
 router.put('/update-tag-group/:id', controller.updateTagGroup);
+// Delete Tag Group
+router.delete('/delete-tag-group/:id', controller.deleteTagGroup);
 
 module.exports = router
