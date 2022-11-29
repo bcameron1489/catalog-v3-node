@@ -10,6 +10,8 @@ router.get('/', controller.getLists);
 router.get('/:id', controller.getListById);
 // Get List Profiles
 router.get('/get-list-profiles/:id', controller.getListProfiles);
+// Get List Profile Relationships
+router.get('/get-list-relationships', controller.getListRelationships);
 
 
 
