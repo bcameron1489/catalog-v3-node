@@ -12,7 +12,7 @@ router.get('/:id', controller.getEventById);
 // Create Event
 router.post('/create-event', controller.createEvent);
 // Get Event Metrics
-router.get('/get-event-metrics', controller.getEventMetrics);
+router.get('/get-event-metrics/:id', controller.getEventMetrics);
 
 
 module.exports = router
