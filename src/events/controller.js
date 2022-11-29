@@ -93,6 +93,36 @@ const getEventMetrics = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Get Event Profiles
+
+const getEventProfiles = (req, res) => {
+    const id = req.params.id 
+    const url = 'https://a.klaviyo.com/api/events/'+ `${id}` +'/profiles/?fields[profile]=email';
+    const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        Authorization: env.auth
+    }
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 // Create Event
 
 const createEvent = (req, res) => {
@@ -138,5 +168,6 @@ module.exports = {
     getEvents,
     getEventById,
     getEventMetrics,
+    getEventProfiles,
     createEvent,
 }
