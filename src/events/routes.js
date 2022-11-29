@@ -16,7 +16,7 @@ router.get('/get-event-metrics/:id', controller.getEventMetrics);
 // Get Event Profiles
 router.get('/get-event-profiles/:id', controller.getEventProfiles);
 // Get Event Relationships
-router.get('/get-event-relationships', controller.getEventRelationships);
+router.get('/get-event-relationships/:id/:type', controller.getEventRelationships);
 
 
 module.exports = router
