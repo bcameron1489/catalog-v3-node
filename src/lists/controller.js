@@ -184,6 +184,34 @@ const updateList = (req, res) => {
     res.send('Successfully Updated List Name to ' + `${name}`)
 }
 
+// Delete List
+
+const deleteList = (req, res) => {
+    const id = req.params.id
+    const url = 'https://a.klaviyo.com/api/lists/' + `${id}`;
+    const options = {
+        method: 'DELETE',
+        headers: {
+            accept: 'application/json',
+            revision: '2022-10-17',
+            Authorization: env.auth
+        }
+    };
+
+    fetch(url, options)
+            .then(r => {
+                if (r.ok) {
+                    console.log('Deleted List')
+                } else  {
+                    console.log('Failed to remove List')
+                    return ;
+                }
+            })
+            .catch(err => console.error('error:' + err));
+
+    res.status(200).send('Your List was deleted with the ID ' + `${id}`)
+}
+
 
 module.exports = {
     getLists,
@@ -192,4 +220,5 @@ module.exports = {
     getListRelationships,
     createList,
     updateList,
+    deleteList,
 }
