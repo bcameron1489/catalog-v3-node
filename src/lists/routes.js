@@ -20,6 +20,8 @@ router.post('/add-profile-to-list/:listId', controller.addProfileToList);
 router.put('/update-list', controller.updateList);
 // Delete List
 router.delete('/delete-list/:id', controller.deleteList);
+// Delete profile from list
+router.delete('/remove-from-list/:id', controller.removeFromList);
 
 
 
