@@ -156,6 +156,34 @@ const createList = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+const updateList = (req, res) => {
+    const id = req.body.id
+    const name = req.body.name
+    const url = 'https://a.klaviyo.com/api/lists/' + `${id}`;
+    const options = {
+        method: 'PATCH',
+        headers: {
+            accept: 'application/json',
+            revision: '2022-10-17',
+            'content-type': 'application/json',
+            Authorization: env.auth
+        },
+        body: JSON.stringify({data: {type: 'list', attributes: {name: `${name}`}, id: `${id}`}})
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+        } else {
+            console.log('REQUEST FAILURE')
+            res.end()
+        }
+    })
+    .catch(err => console.error('error:' + err));
+    res.send('Successfully Updated List Name to ' + `${name}`)
+}
+
 
 module.exports = {
     getLists,
@@ -163,4 +191,5 @@ module.exports = {
     getListProfiles,
     getListRelationships,
     createList,
+    updateList,
 }
