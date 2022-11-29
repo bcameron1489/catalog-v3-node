@@ -6,6 +6,8 @@ const router = Router();
 
 // Get Lists
 router.get('/', controller.getLists);
+// Get List By ID
+router.get('/:id', controller.getListById);
 
 
 
