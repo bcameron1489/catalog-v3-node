@@ -7,7 +7,7 @@ const env = require('../env')
 // Get Events
 
 const getEvents = (req,res) => {
-    const url = 'https://a.klaviyo.com/api/events/?fields[event]=metric_id,profile_id,timestamp,event_properties,datetime,uuid&fields[metric]=name&include=metrics&sort=datetime';
+    const url = 'https://a.klaviyo.com/api/events/?fields[event]=metric_id,profile_id,timestamp,event_properties,datetime,uuid&fields[metric]=name&include=metrics&sort=-datetime';
     const options = {
     method: 'GET',
     headers: {
