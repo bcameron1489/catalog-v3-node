@@ -14,6 +14,8 @@ router.get('/get-list-profiles/:id', controller.getListProfiles);
 router.get('/get-list-relationships/:id', controller.getListRelationships);
 // Create List
 router.post('/create-list', controller.createList);
+// Update List
+router.put('/update-list', controller.updateList);
 
 
 
