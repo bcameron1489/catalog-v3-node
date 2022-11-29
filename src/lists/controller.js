@@ -64,7 +64,41 @@ const getListById = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Get List Profiles
+
+const getListProfiles = (req, res) => {
+    const id = req.params.id
+    const url = 'https://a.klaviyo.com/api/lists/'+ `${id}` +'/profiles/?fields[profile]=email';
+    const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        Authorization: env.auth
+    }
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
+
+
+
 module.exports = {
     getLists,
     getListById,
+    getListProfiles,
 }
