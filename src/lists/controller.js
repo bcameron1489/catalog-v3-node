@@ -124,10 +124,43 @@ const getListRelationships = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+//  Create List
+
+const createList = (req, res) => {
+    const name = req.body.name
+    const url = 'https://a.klaviyo.com/api/lists/';
+    const options = {
+        method: 'POST',
+        headers: {
+            accept: 'application/json',
+            revision: '2022-10-17',
+            'content-type': 'application/json',
+            Authorization: env.auth
+        },
+        body: JSON.stringify({data: {type: 'list', attributes: {name: `${name}`}}})
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 
 module.exports = {
     getLists,
     getListById,
     getListProfiles,
     getListRelationships,
+    createList,
 }
