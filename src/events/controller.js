@@ -63,6 +63,8 @@ const getEventById = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Get Event Metrics
+
 const getEventMetrics = (req, res) => {
     const id = req.params.id
     const url = 'https://a.klaviyo.com/api/events/'+ `${id}` +'/metrics/?fields[metric]=name,created';
