@@ -213,12 +213,45 @@ const deleteList = (req, res) => {
 }
 
 
+// Add profiles to list
+
+const addProfileToList = (req, res) => {
+    const listId = req.params.listId
+    const profileId = req.body.profileId
+    
+    const url = 'https://a.klaviyo.com/api/lists/'+ `${listId}` +'/relationships/profiles/';
+    const options = {
+    method: 'POST',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({data: [{type: 'profile', id: `${profileId}`}]})
+    };
+
+    fetch(url, options)
+            .then(r => {
+                if (r.ok) {
+                    console.log('Profile added to List')
+                } else  {
+                    console.log('Failed to add to List')
+                    return ;
+                }
+            })
+            .catch(err => console.error('error:' + err));
+
+    res.status(200).send('Profile ' + `${profileId}` + ' was added to list')
+}
+
 module.exports = {
     getLists,
     getListById,
     getListProfiles,
     getListRelationships,
     createList,
+    addProfileToList,
     updateList,
     deleteList,
 }
