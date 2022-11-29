@@ -16,6 +16,8 @@ router.get('/get-list-relationships/:id', controller.getListRelationships);
 router.post('/create-list', controller.createList);
 // Update List
 router.put('/update-list', controller.updateList);
+// Delete List
+router.delete('/delete-list/:id', controller.deleteList);
 
 
 
