@@ -6,7 +6,7 @@ const router = Router();
 
 // Get Segments
 
-app.get('/', controller.getSegments);
+router.get('/', controller.getSegments);
 
 
 module.exports = router;
