@@ -12,6 +12,8 @@ router.get('/:id', controller.getSegmentById);
 router.get('/get-segment-profiles/:id', controller.getSegmentProfiles);
 // Get Segment Relationships
 router.get('/get-segment-relationships/:id', controller.getSegmentRelationships);
+// Update Segment
+router.put('/update-segment', controller.updateSegment);
 
 
 
