@@ -11,7 +11,7 @@ router.get('/:id', controller.getSegmentById);
 // Get Segment Profiles
 router.get('/get-segment-profiles/:id', controller.getSegmentProfiles);
 // Get Segment Relationships
-router.get('/get-segment-relationships', controller.getSegmentRelationships);
+router.get('/get-segment-relationships/:id', controller.getSegmentRelationships);
 
 
 
