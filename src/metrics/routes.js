@@ -8,6 +8,8 @@ const router = Router();
 router.get('/', controller.getMetrics);
 // Get Metric By ID
 router.get('/:id', controller.getMetricById);
+// Query Metric Aggregates
+router.post('/aggregates', controller.aggregates);
 
 
 
