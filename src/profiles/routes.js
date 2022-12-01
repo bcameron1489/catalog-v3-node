@@ -4,7 +4,8 @@ const controller = require('./controller');
 
 const router = Router();
 
-
+// Get Profiles
+router.get('/', controller.getProfiles);
 
 
 
