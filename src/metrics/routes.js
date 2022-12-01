@@ -6,6 +6,8 @@ const router = Router();
 
 // Get Metrics
 router.get('/', controller.getMetrics);
+// Get Metric By ID
+router.get('/:id', controller.getMetricById);
 
 
 
