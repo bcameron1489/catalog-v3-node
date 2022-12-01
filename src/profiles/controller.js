@@ -125,10 +125,43 @@ const getProfileSegments = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+// Get Profile Relationships
+
+const getProfileRelationships = (req, res) => {
+    const id = req.params.id
+    const type = req.params.type
+
+    const url = 'https://a.klaviyo.com/api/profiles/'+ `${id}` +'/relationships/' + `${type}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            revision: '2022-10-17',
+            Authorization: env.auth
+        }
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 
 module.exports = {
     getProfiles,
     getProfileById,
     getProfileLists,
-    getProfileSegments
+    getProfileSegments,
+    getProfileRelationships
 }
