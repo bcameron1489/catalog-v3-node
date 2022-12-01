@@ -10,6 +10,8 @@ router.get('/', controller.getProfiles);
 router.get('/:id', controller.getProfileById);
 // Get Profile Lists
 router.get('/get-profile-lists/:id', controller.getProfileLists);
+// Get Profile Segments
+router.get('/get-profile-segments/:id', controller.getProfileSegments);
 
 
 
