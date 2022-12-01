@@ -12,6 +12,8 @@ router.get('/:id', controller.getProfileById);
 router.get('/get-profile-lists/:id', controller.getProfileLists);
 // Get Profile Segments
 router.get('/get-profile-segments/:id', controller.getProfileSegments);
+// Get Profile Relationships
+router.get('/get-profile-relationships/:id/:type', controller.getProfileRelationships);
 
 
 
