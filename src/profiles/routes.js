@@ -6,6 +6,8 @@ const router = Router();
 
 // Get Profiles
 router.get('/', controller.getProfiles);
+// Get Profile By Id
+router.get('/:id', controller.getProfileById);
 
 
 
