@@ -2,7 +2,8 @@ const { json, application } = require('express');
 const pool = require('../../db')
 // const queries = require('./queries')
 const fetch = require('node-fetch')
-const env = require('../env')
+const env = require('../env');
+const { create } = require('domain');
 
 // Get Profiles
 
@@ -157,11 +158,52 @@ const getProfileRelationships = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+//  Create Profile
+
+const createProfile = (req, res) => {
+    const userEmail = req.body.userEmail
+
+    const url = 'https://a.klaviyo.com/api/profiles/';
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: env.auth
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'profile',
+          attributes: {
+            email: `${userEmail}`
+          }
+        }
+      })
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+}
+
 
 module.exports = {
     getProfiles,
     getProfileById,
     getProfileLists,
     getProfileSegments,
-    getProfileRelationships
+    getProfileRelationships,
+    createProfile
 }
