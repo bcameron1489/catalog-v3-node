@@ -4,6 +4,7 @@ const pool = require('../../db')
 const fetch = require('node-fetch')
 const env = require('../env');
 const { create } = require('domain');
+const bodyParser = require('body-parser');
 
 // Get Profiles
 
@@ -162,6 +163,7 @@ const getProfileRelationships = (req, res) => {
 
 const createProfile = (req, res) => {
     const userEmail = req.body.userEmail
+    const property = req.body.property
 
     const url = 'https://a.klaviyo.com/api/profiles/';
     const options = {
@@ -176,6 +178,7 @@ const createProfile = (req, res) => {
         data: {
           type: 'profile',
           attributes: {
+            properties: property,
             email: `${userEmail}`
           }
         }
@@ -199,11 +202,12 @@ const createProfile = (req, res) => {
 }
 
 
+
 module.exports = {
     getProfiles,
     getProfileById,
     getProfileLists,
     getProfileSegments,
     getProfileRelationships,
-    createProfile
+    createProfile,
 }
