@@ -7,11 +7,13 @@ const listRoutes = require('./src/lists/routes')
 const segmentRoutes = require('./src/segments/routes')
 const metricRoutes = require('./src/metrics/routes')
 const profileRoutes = require('./src/profiles/routes')
+const bodyParser = require('body-parser')
 
 const app = express()
 const port = 3000
 
 app.use(express.json())
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.send('hello world')
