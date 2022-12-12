@@ -18,6 +18,8 @@ router.get('/get-profile-relationships/:id/:type', controller.getProfileRelation
 router.post('/create-profile', controller.createProfile);
 // Update Profile
 router.put('/update-profile', controller.updateProfile);
+// Supress Profiles
+router.post('/suppress-profiles', controller.supressProfiles);
 
 
 
