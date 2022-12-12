@@ -201,6 +201,55 @@ const createProfile = (req, res) => {
     .catch(err => console.error('error:' + err));
 }
 
+//  Update Profile
+
+const updateProfile = (req, res) => {
+    const id = req.body.id
+    const property = req.body.property
+    const userEmail = req.body.userEmail
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+
+    const url = 'https://a.klaviyo.com/api/profiles/' + `${id}`;
+    const options = {
+    method: 'PATCH',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({
+        data: {
+        type: 'profile',
+        attributes: {
+            properties: property,
+            email: `${userEmail}`,
+            first_name: `${firstName}`,
+            last_name: `${lastName}`
+        },
+        id: `${id}`
+        }
+    })
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+            return res.json()
+        } else {
+            console.log('REQUEST FAILURE')
+        }
+    })
+    .then(json => {
+        console.log(json)
+        res.status(200).send(json)
+    })
+    .catch(err => console.error('error:' + err));
+
+}
+
 
 
 module.exports = {
@@ -210,4 +259,5 @@ module.exports = {
     getProfileSegments,
     getProfileRelationships,
     createProfile,
+    updateProfile
 }
