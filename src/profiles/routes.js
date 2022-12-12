@@ -16,6 +16,8 @@ router.get('/get-profile-segments/:id', controller.getProfileSegments);
 router.get('/get-profile-relationships/:id/:type', controller.getProfileRelationships);
 // Create Profile
 router.post('/create-profile', controller.createProfile);
+// Update Profile
+router.put('/update-profile', controller.updateProfile);
 
 
 
