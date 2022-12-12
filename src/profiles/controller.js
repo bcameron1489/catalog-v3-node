@@ -250,6 +250,42 @@ const updateProfile = (req, res) => {
 
 }
 
+//  Supress Profiles
+
+const suppressProfiles = (req, res) => {
+    const emails = req.body.emails
+    console.log(emails)
+
+    const url = 'https://a.klaviyo.com/api/profile-suppression-bulk-create-jobs/';
+    const options = {
+    method: 'POST',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({
+        data: {
+        type: 'profile-suppression-bulk-create-job',
+        attributes: {suppressions: emails}
+        }
+    })
+    };
+
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+        } else {
+            console.log('REQUEST FAILURE')
+            res.end()
+        }
+    })
+    .catch(err => console.error('error:' + err));
+    res.send('Successfully suppressed emails')
+}
 
 
 module.exports = {
@@ -259,5 +295,6 @@ module.exports = {
     getProfileSegments,
     getProfileRelationships,
     createProfile,
-    updateProfile
+    updateProfile,
+    suppressProfiles
 }
