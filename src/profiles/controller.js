@@ -321,6 +321,42 @@ const unsuppressProfiles = (req, res) => {
     res.send('Successfully unsuppressed emails')
 }
 
+// Subscribe Profiles
+
+const subscribeProfiles = (req, res) => {
+    const id = req.body.id
+    const emails = req.body.emails
+
+    const url = 'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/';
+    const options = {
+    method: 'POST',
+    headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: env.auth
+    },
+    body: JSON.stringify({
+        data: {
+        type: 'profile-subscription-bulk-create-job',
+        attributes: {subscriptions: emails, list_id: `${id}`}
+        }
+    })
+    };
+
+    fetch(url, options)
+    .then(res => {
+        if (res.ok) {
+            console.log('SUCCESS')
+        } else {
+            console.log('REQUEST FAILURE')
+            res.end()
+        }
+    })
+    .catch(err => console.error('error:' + err));
+    res.send('Successfully subscribed emails')
+}
+
 
 module.exports = {
     getProfiles,
@@ -331,5 +367,6 @@ module.exports = {
     createProfile,
     updateProfile,
     suppressProfiles,
-    unsuppressProfiles
+    unsuppressProfiles,
+    subscribeProfiles
 }
