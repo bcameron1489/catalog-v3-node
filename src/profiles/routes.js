@@ -22,6 +22,8 @@ router.put('/update-profile', controller.updateProfile);
 router.post('/suppress-profiles', controller.suppressProfiles);
 // Unsuppress Profiles
 router.post('/unsuppress-profiles', controller.unsuppressProfiles);
+//
+router.post('/subscribe-profiles', controller.subscribeProfiles);
 
 
 
