@@ -20,6 +20,8 @@ router.post('/create-profile', controller.createProfile);
 router.put('/update-profile', controller.updateProfile);
 // Supress Profiles
 router.post('/suppress-profiles', controller.suppressProfiles);
+// Unsuppress Profiles
+router.post('/unsuppress-profiles', controller.unsuppressProfiles);
 
 
 
